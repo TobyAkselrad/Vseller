@@ -15,7 +15,7 @@ namespace Vseller.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Hola Fede labura";
 
             return View();
         }
