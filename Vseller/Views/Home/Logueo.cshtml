@@ -1,0 +1,21 @@
+﻿@using Vseller.Models
+@model Usuario
+
+@if (ViewBag.Error != "")
+{
+    <p>@ViewBag.Error</p>
+}
+
+
+@using (Html.BeginForm("Logueo", "Backoffice", FormMethod.Post))
+{
+    <p>Username</p> @Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)<br />
+    <p>Password</p> @Html.PasswordFor(model => model.Contraseña)@Html.ValidationMessageFor(model => model.Contraseña)<br />
+    <input type="submit" value="Ingresar">
+}
+
+@if (Model.Admin == true)
+{
+    <a href="@Url.Action("Index","BackOffice")"></a>
+
+}
