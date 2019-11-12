@@ -16,13 +16,13 @@ namespace Vseller.Controllers
         }
 
         [HttpPost]
-        public ActionResult Logueo(Usuario user)
+        public ActionResult Login(Usuario user)
         {
             
             bool Existe;
             if (ModelState.IsValid)
             {
-//                Existe = BD.ExisteUsuario(user);
+                Existe = BD.ExisteUsuario(user);
                 if (Existe)
                 {
                     

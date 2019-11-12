@@ -22,6 +22,27 @@ namespace Vseller.Models
             Conn.Close();
         }
 
+        public static bool ExisteUsuario(Usuario user)
+        {
+            bool Existe;
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("sp_VerificarUsuario", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@usuario", user.Username);
+            cmd.Parameters.AddWithValue("@contraseña", user.Contraseña);
+            cmd.Parameters.AddWithValue("@adm", user.Admin);
 
+            SqlDataReader Lector = cmd.ExecuteReader();
+            if (Lector.Read())
+            {
+                Existe = true;
+            }
+            else
+            {
+                Existe = false;
+            }
+            Desconectar(Conexion);
+            return Existe;
+        }
     }
 }
