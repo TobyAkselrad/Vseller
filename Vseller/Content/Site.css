@@ -22,3 +22,17 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#centrado {
+    border: yellow 2px solid;
+    margin-left: 350px;
+    margin-right: 350px;
+    margin-top: 50px;
+    height: 235px;
+    width: 1000px;
+}
+
+#espacioArriba {
+    padding-top: 25px;
+  
+}
