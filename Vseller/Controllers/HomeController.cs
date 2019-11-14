@@ -16,17 +16,24 @@ namespace Vseller.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Usuario user)
-        {
-            
+        public ActionResult Logueo(Usuario user)
+        {            
             bool Existe;
             if (ModelState.IsValid)
             {
                 Existe = BD.ExisteUsuario(user);
                 if (Existe)
                 {
-                    
-                    return View("Index");
+                    string ir="";
+                    if (user.Admin == false) {
+                         ir = "Index";
+                        return View("Index");
+                    }
+
+                    else {
+                         ir = "BackOffice";
+                    }
+                    return RedirectToAction("Index", "BackOffice");
                 }
                 else
                 {
@@ -38,6 +45,11 @@ namespace Vseller.Controllers
             {
                 return View("Login", user);
             }
+        }
+
+        public ActionResult Login ()
+        {
+            return View();
         }
 
         public ActionResult About()
