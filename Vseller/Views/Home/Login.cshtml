@@ -11,18 +11,8 @@
     string Controller = "";
 }
 
-@if (Model.Admin == false) { 
-ActionMetodo = "Login";
-Controller = "Home";
-}
 
-@if (Model.Admin == true) { 
-ActionMetodo = "Index";
-Controller = "Backoffice";
-}
-
-
-@using (Html.BeginForm(ActionMetodo, Controller, FormMethod.Post))
+@using (Html.BeginForm("Logueo", "Home", FormMethod.Post))
 {
     <p>Username</p> @Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)<br />
     <p>Password</p> @Html.PasswordFor(model => model.Contraseña)@Html.ValidationMessageFor(model => model.Contraseña)<br />

@@ -15,7 +15,7 @@ namespace Vseller.Models
         public string Username { get; set; }
 
         public string Nombre { get; set; }
-        public bool Admin { get; }
+        public bool Admin { get; set; }
 
         public Usuario()
         {
