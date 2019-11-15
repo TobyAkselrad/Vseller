@@ -156,6 +156,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BD.cs" />
+    <Compile Include="Models\DatosProducto.cs" />
+    <Compile Include="Models\Detalle.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\tipo.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
