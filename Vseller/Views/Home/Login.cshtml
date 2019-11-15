@@ -6,12 +6,6 @@
     <p>@ViewBag.Error</p>
 }
 
-@{
-    string ActionMetodo = "";
-    string Controller = "";
-}
-
-
 @using (Html.BeginForm("Logueo", "Home", FormMethod.Post))
 {
     <p>Username</p> @Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)<br />
