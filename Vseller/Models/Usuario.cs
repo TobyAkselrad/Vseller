@@ -14,6 +14,7 @@ namespace Vseller.Models
         [Required(ErrorMessage = "Ingrese nombre de usuario")]
         public string Username { get; set; }
 
+        [Required(ErrorMessage = "Ingrese nombre")]
         public string Nombre { get; set; }
         public bool Admin { get; set; }
 

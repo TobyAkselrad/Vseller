@@ -51,6 +51,17 @@ namespace Vseller.Controllers
             return View();
         }
 
+        public ActionResult Registro(Usuario user)
+        {
+            return View();
+        }
+
+
+        public ActionResult Registrado()
+        {
+            return Index();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Labura Fede";

@@ -73,15 +73,13 @@ namespace Vseller.Models
             SqlDataReader Lector = cmd.ExecuteReader();
             Desconectar(Conexion);
         }
-        public static void Cargar3Producto(Producto prod)
+        public static void CargarUsuario(Usuario user)
         {
             SqlConnection Conexion = Conectar();
-            SqlCommand cmd = new SqlCommand("spCargarProducto", Conexion);
+            SqlCommand cmd = new SqlCommand("spCargarUsuario", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@fkTipo", prod.FkTipo);
-            cmd.Parameters.AddWithValue("@Foto", prod.NomFoto);
-            cmd.Parameters.AddWithValue("@Nombre", prod.Nombre);
-            cmd.Parameters.AddWithValue("@Precio", prod.Precio);
+            cmd.Parameters.AddWithValue("@username", user.Username);
+            cmd.Parameters.AddWithValue("@password", user.Contraseña);
             SqlDataReader Lector = cmd.ExecuteReader();
             Desconectar(Conexion);
         }
