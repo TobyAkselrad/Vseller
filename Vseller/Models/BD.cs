@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,7 @@ namespace Vseller.Models
 {
     public static class BD
     {
-        public static string connectionString = "Server=.;Database=VsellerDB;Trusted_Connection=true;";
+        public static string connectionString = "Server=.;Database=VsellerDB;user id=alumno; password=alumno1;";
 
         public static SqlConnection Conectar()
         {
@@ -26,11 +27,10 @@ namespace Vseller.Models
         {
             bool Existe;
             SqlConnection Conexion = Conectar();
-            SqlCommand cmd = new SqlCommand("sp_VerificarUsuario", Conexion);
+            SqlCommand cmd = new SqlCommand("spSelectUsuario", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@usuario", user.Username);
-            cmd.Parameters.AddWithValue("@contraseña", user.Contraseña);
-            cmd.Parameters.AddWithValue("@adm", user.Admin);
+            cmd.Parameters.AddWithValue("@username", user.Username);
+            cmd.Parameters.AddWithValue("@password", user.Contraseña);
 
             SqlDataReader Lector = cmd.ExecuteReader();
             if (Lector.Read())
@@ -43,6 +43,47 @@ namespace Vseller.Models
             }
             Desconectar(Conexion);
             return Existe;
+        }
+        public static bool TraerAdmin(Usuario user)
+        {
+            bool Admin=false;
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spTraerAdmin", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@username", user.Username);
+            cmd.Parameters.AddWithValue("@password", user.Contraseña);
+
+            SqlDataReader Lector = cmd.ExecuteReader();
+            if (Lector.Read())
+            {
+                Admin = Convert.ToBoolean(Lector["Admin"]);
+            }         
+            Desconectar(Conexion);
+            return Admin;
+        }
+        public static void CargarProducto(Producto prod)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spCargarProducto", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@fkTipo", prod.FkTipo);
+            cmd.Parameters.AddWithValue("@Foto", prod.NomFoto);
+            cmd.Parameters.AddWithValue("@Nombre", prod.Nombre);
+            cmd.Parameters.AddWithValue("@Precio", prod.Precio);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            Desconectar(Conexion);
+        }
+        public static void Cargar3Producto(Producto prod)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spCargarProducto", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@fkTipo", prod.FkTipo);
+            cmd.Parameters.AddWithValue("@Foto", prod.NomFoto);
+            cmd.Parameters.AddWithValue("@Nombre", prod.Nombre);
+            cmd.Parameters.AddWithValue("@Precio", prod.Precio);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            Desconectar(Conexion);
         }
     }
 }

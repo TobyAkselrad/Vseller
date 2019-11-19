@@ -19,21 +19,20 @@ namespace Vseller.Controllers
         public ActionResult Logueo(Usuario user)
         {            
             bool Existe;
+            bool Admin;
+            Admin = BD.TraerAdmin(user);
             if (ModelState.IsValid)
             {
                 Existe = BD.ExisteUsuario(user);
                 if (Existe)
                 {
-                    string ir="";
-                    if (user.Admin == false) {
-                         ir = "Index";
+                    if (Admin == false) {
                         return View("Index");
                     }
 
                     else {
-                         ir = "BackOffice";
+                        return RedirectToAction("Index", "BackOffice");
                     }
-                    return RedirectToAction("Index", "BackOffice");
                 }
                 else
                 {
