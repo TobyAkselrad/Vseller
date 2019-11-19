@@ -53,6 +53,16 @@ namespace Vseller.Controllers
 
         public ActionResult Registro(Usuario user)
         {
+            bool existe;
+            existe = BD.ExisteUsername(user);
+            if (existe)
+            {
+                ViewBag.Error = "Nombre de usuario ya existente";
+            }
+            else
+            {
+                BD.CargarUsuario(user);
+            }
             return View();
         }
 

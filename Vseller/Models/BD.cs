@@ -44,6 +44,28 @@ namespace Vseller.Models
             Desconectar(Conexion);
             return Existe;
         }
+
+        public static bool ExisteUsername(Usuario user)
+        {
+            bool Existe;
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spValidarUsuario", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@user", user.Username);
+
+            SqlDataReader Lector = cmd.ExecuteReader();
+            if (Lector.Read())
+            {
+                Existe = true;
+            }
+            else
+            {
+                Existe = false;
+            }
+            Desconectar(Conexion);
+            return Existe;
+        }
+        
         public static bool TraerAdmin(Usuario user)
         {
             bool Admin=false;
