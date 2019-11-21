@@ -124,6 +124,7 @@ namespace Vseller.Models
             }
             Desconectar(Conexion);
             return ListaTipos;
+
         }
     }
 }
