@@ -7,40 +7,21 @@
 <link rel="stylesheet" href="~/Content/animate.css">
 <link rel="stylesheet" href="~/Content/style.css">
 <link rel="stylesheet" href="~/Content/responsive.css">
+@using Vseller.Models
 
 
-<a href="@Url.Action("Producto", "BackOffice", new {Producto="Zapatillas"})">
-    <div class="col-lg-4" href="@Url.Action("Producto", "BackOffice", new {Producto="Zapatillas"})">
-        <div class="offer_item">
-            <img class="img-fluid" src="~/Content/img/zapatilla1.jpg" alt="">
-            <div class="offer_text">
-                Lower Clothes
+@for (int i = 0; i < ViewBag.Tipos.Count; i++)
+{
+    <a href="@Url.Action("Producto", "BackOffice", new {Producto=ViewBag.Tipos[i].Desc})">
+        <div class="col-lg-4">
+            <div class="offer_item">
+                <img class="img-fluid" src="~/Content/img/@ViewBag.Tipos[i].Img" alt="">
+                <div class="offer_text">
+                    @ViewBag.Tipos[i].Desc
+                </div>
             </div>
         </div>
-    </div>
-</a>
-
-<a href="@Url.Action("Producto", "BackOffice", new {Producto="Zapatillas"})">
-    <div class="col-lg-4" href="@Url.Action("Producto", "BackOffice", new {Producto="Zapatillas"})">
-        <div class="offer_item">
-            <img class="img-fluid" src="~/Content/img/zapatilla1.jpg" alt="">
-            <div class="offer_text">
-                Upper Clothes 
-            </div>
-        </div>
-    </div>
-</a>
-
-
-<a href="@Url.Action("Producto", "BackOffice", new {Producto="Zapatillas"})">
-    <div class="col-lg-4" href="@Url.Action("Producto", "BackOffice", new {Producto="Zapatillas"})">
-        <div class="offer_item">
-            <img class="img-fluid" src="~/Content/img/zapatilla1.jpg" alt="">
-            <div class="offer_text">
-                Shoes
-            </div>
-        </div>
-    </div>
-</a>
+    </a>
+}
 
 

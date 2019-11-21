@@ -105,5 +105,25 @@ namespace Vseller.Models
             SqlDataReader Lector = cmd.ExecuteReader();
             Desconectar(Conexion);
         }
+
+        public static List<tipo> TraerTipos()
+        {
+            List<tipo> ListaTipos = new List<tipo>();
+            tipo unTipo = new tipo();
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spTraerTipos", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader Lector = cmd.ExecuteReader();
+            while (Lector.Read())
+            {
+                int Id = Convert.ToInt32(Lector["idTipo"]);
+                string Desc = Lector["Descripcion"].ToString();
+                string Img = Lector["Imagen"].ToString();
+                unTipo = new tipo(Id, Desc, Img);
+                ListaTipos.Add(unTipo);
+            }
+            Desconectar(Conexion);
+            return ListaTipos;
+        }
     }
 }

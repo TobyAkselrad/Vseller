@@ -13,6 +13,9 @@ namespace Vseller.Controllers
         // GET: BackOffice
         public ActionResult Index()
         {
+            List<tipo> ListaTipos = new List<tipo>();
+            ListaTipos = BD.TraerTipos();
+            ViewBag.Tipos = ListaTipos;
             return View();
         }
 
