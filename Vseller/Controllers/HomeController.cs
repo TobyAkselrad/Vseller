@@ -51,7 +51,7 @@ namespace Vseller.Controllers
             return View();
         }
 
-        public ActionResult Registro(Usuario user)
+        public ActionResult Registrado(Usuario user)
         {
             bool existe;
             existe = BD.ExisteUsername(user);
@@ -63,11 +63,11 @@ namespace Vseller.Controllers
             {
                 BD.CargarUsuario(user);
             }
-            return View();
+            return View("Registro");
         }
 
 
-        public ActionResult Registrado()
+        public ActionResult Registro()
         {
             return Index();
         }

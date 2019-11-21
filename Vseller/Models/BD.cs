@@ -51,7 +51,7 @@ namespace Vseller.Models
             SqlConnection Conexion = Conectar();
             SqlCommand cmd = new SqlCommand("spValidarUsuario", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@user", user.Username);
+            cmd.Parameters.AddWithValue("@User", user.Username);
 
             SqlDataReader Lector = cmd.ExecuteReader();
             if (Lector.Read())
