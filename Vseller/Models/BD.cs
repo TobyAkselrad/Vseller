@@ -126,5 +126,29 @@ namespace Vseller.Models
             return ListaTipos;
 
         }
+
+        public static List<Producto> TraerProductosPorTipo(int idTipo)
+        {
+            List<Producto> ListaProductos= new List<Producto>();
+           Producto unProducto = new Producto();
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spTraerProductoPorTipo", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@tipo", idTipo);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            while (Lector.Read())
+            {
+                int Id = Convert.ToInt32(Lector["idProducto"]);
+                int fk = Convert.ToInt32(Lector["fkTipo"]);
+                string foto = Lector["Foto"].ToString();
+                string nomb = Lector["Nombre"].ToString();
+                int precio = Convert.ToInt32(Lector["Precio"]);
+                unProducto = new Producto(Id, fk,foto,nomb,precio);
+                ListaProductos.Add(unProducto);
+            }
+            Desconectar(Conexion);
+            return ListaProductos;
+
+        }
     }
 }

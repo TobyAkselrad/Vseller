@@ -19,7 +19,15 @@ namespace Vseller.Controllers
             return View();
         }
 
-        
+        public ActionResult ProductosxTipo(int IdTipoProd)
+        {
+            List<Producto> ListaProductos = new List<Producto>();
+            ListaProductos = BD.TraerProductosPorTipo(IdTipoProd);
+            ViewBag.Lista = ListaProductos;
+            return View();
+        }
+
+
 
     }
 }

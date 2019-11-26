@@ -1,0 +1,38 @@
+﻿<link rel="stylesheet" href="~/Content/bootstrap.css">
+<link rel="stylesheet" href="~/Content/style.css">
+<link rel="stylesheet" href="~/Content/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+<link rel="stylesheet" href="~/Content/simpleLightbox.css">
+<link rel="stylesheet" href="~/Content/nice-select.css">
+<link rel="stylesheet" href="~/Content/animate.css">
+<link rel="stylesheet" href="~/Content/style.css">
+<link rel="stylesheet" href="~/Content/responsive.css">
+@using Vseller.Models
+
+
+<table>
+    @foreach (Producto prod in ViewBag.Lista)
+    {
+       /* <a href="@Url.Action("ProductosxTipo", "BackOffice", new {IdTipoProd=tip.Id})">
+            <div class="col-lg-4">
+                <div class="offer_item">
+                    <img class="img-fluid" src="~/Content/img/@tip.Img" alt="">
+                    <div class="offer_text">
+                        @tip.Desc
+                    </div>
+                </div>
+            </div>
+        </a>*/
+        <tr>
+            <td>
+                <img src="~/Content/@prod.Foto" />
+            </td>
+            <td>
+                <p>@prod.Nombre</p>
+            </td>
+            <td>
+                <img src="~/Content/img/editicon.png" style=" width:5%"/>
+            </td>
+        </tr>
+    }
+</table>

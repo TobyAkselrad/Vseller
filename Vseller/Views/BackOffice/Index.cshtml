@@ -9,19 +9,20 @@
 <link rel="stylesheet" href="~/Content/responsive.css">
 @using Vseller.Models
 
-
-@for (int i = 0; i < ViewBag.Tipos.Count; i++)
+<h1>Productos</h1>
+@foreach (tipo tip in ViewBag.Tipos)
 {
-    <a href="@Url.Action("Producto", "BackOffice", new {Producto=ViewBag.Tipos[i].Desc})">
+    <a href="@Url.Action("ProductosxTipo", "BackOffice", new {IdTipoProd=tip.Id})">
         <div class="col-lg-4">
             <div class="offer_item">
-                <img class="img-fluid" src="~/Content/img/@ViewBag.Tipos[i].Img" alt="">
+                <img class="img-fluid" src="~/Content/img/@tip.Img" alt="">
                 <div class="offer_text">
-                    @ViewBag.Tipos[i].Desc
+                    @tip.Desc
                 </div>
             </div>
         </div>
     </a>
 }
+
 
 
