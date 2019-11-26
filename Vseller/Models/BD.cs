@@ -177,20 +177,50 @@ namespace Vseller.Models
             SqlConnection Conexion = Conectar();
             SqlCommand cmd = new SqlCommand("spTraerDatosporId", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@idProd", id);
             SqlDataReader Lector = cmd.ExecuteReader();
             while (Lector.Read())
             {
-                /*int IdProd = Convert.ToInt32(Lector["idProducto"]);
-                int fk = Convert.ToInt32(Lector["fkTipo"]);
-                string foto = Lector["Foto"].ToString();
-                
-                Producto unProducto1 = new Producto(Id, fk, foto, nomb, precio);
-                unProducto = unProducto1;
-            }*/
+                string deta= Lector["Descripcion"].ToString();
+                int fkProducto = Convert.ToInt32(Lector["fkProducto"]);
+                int fkDetalle = Convert.ToInt32(Lector["fkDetalle"]);
+
+                DatosProducto datos1 = new DatosProducto(fkProducto, fkDetalle, deta);
+                datos = datos1;
+            }
 
             Desconectar(Conexion);
-            return unProducto;
+            return datos;
+        }
+
+        public static void EliminarProducto(int id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spEliminarProducto", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            Desconectar(Conexion);
+        }
+
+        public static List<Detalle> TraerDetalle()
+        {
+            List<Detalle> ListDetalles = new List<Detalle>();            
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spTraerDetalles", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlDataReader Lector = cmd.ExecuteReader();
+            while (Lector.Read())
+            {
+                string desc = Lector["Descripción"].ToString();
+                int idDetalle = Convert.ToInt32(Lector["idDetalle"]);                
+
+                Detalle unDetalle = new Detalle(idDetalle,desc);
+                ListDetalles.Add(unDetalle);
+            }
+
+            Desconectar(Conexion);
+            return ListDetalles;
         }
     }
 }

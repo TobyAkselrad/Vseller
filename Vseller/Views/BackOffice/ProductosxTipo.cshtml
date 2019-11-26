@@ -21,12 +21,12 @@
                 <p>@prod.Nombre</p>
             </td>
             <td>
-                <a href="@Url.Action("Producto", "BackOffice", new { idProd = prod.IdProducto })">
+                <a href="@Url.Action("editarProducto", "BackOffice", new { idProd = prod.IdProducto })">
                     <img src="~/Content/img/editicon.png" style=" width:50px" />
                 </a>
             </td>
             <td>
-                <a href="@Url.Action("Producto", "BackOffice", new { idProd = prod.IdProducto })">
+                <a href="@Url.Action("EliminarProducto", "BackOffice", new { idProd = prod.IdProducto })">
                     <img src="~/Content/img/deleteicon.png" style=" width:50px" />
                 </a>
             </td>
