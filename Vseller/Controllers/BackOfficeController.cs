@@ -27,6 +27,12 @@ namespace Vseller.Controllers
             return View();
         }
 
+        public ActionResult editarProducto(int IdProd)
+        {
+            Producto unProducto = BD.TraerProductoPorId(IdProd);
+            DatosProducto datos = BD.TraeDatosPorId(IdProd);
+            return View();
+        }
 
 
     }

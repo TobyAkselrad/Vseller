@@ -65,10 +65,10 @@ namespace Vseller.Models
             Desconectar(Conexion);
             return Existe;
         }
-        
+
         public static bool TraerAdmin(Usuario user)
         {
-            bool Admin=false;
+            bool Admin = false;
             SqlConnection Conexion = Conectar();
             SqlCommand cmd = new SqlCommand("spTraerAdmin", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -79,7 +79,7 @@ namespace Vseller.Models
             if (Lector.Read())
             {
                 Admin = Convert.ToBoolean(Lector["Admin"]);
-            }         
+            }
             Desconectar(Conexion);
             return Admin;
         }
@@ -129,8 +129,8 @@ namespace Vseller.Models
 
         public static List<Producto> TraerProductosPorTipo(int idTipo)
         {
-            List<Producto> ListaProductos= new List<Producto>();
-           Producto unProducto = new Producto();
+            List<Producto> ListaProductos = new List<Producto>();
+            Producto unProducto = new Producto();
             SqlConnection Conexion = Conectar();
             SqlCommand cmd = new SqlCommand("spTraerProductoPorTipo", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -143,12 +143,54 @@ namespace Vseller.Models
                 string foto = Lector["Foto"].ToString();
                 string nomb = Lector["Nombre"].ToString();
                 int precio = Convert.ToInt32(Lector["Precio"]);
-                unProducto = new Producto(Id, fk,foto,nomb,precio);
+                unProducto = new Producto(Id, fk, foto, nomb, precio);
                 ListaProductos.Add(unProducto);
             }
             Desconectar(Conexion);
             return ListaProductos;
+        }
+        public static Producto TraerProductoPorId(int id)
+        {
+            Producto unProducto = new Producto();
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spTraerProductoPorTipo", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            while (Lector.Read())
+            {
+                int Id = Convert.ToInt32(Lector["idProducto"]);
+                int fk = Convert.ToInt32(Lector["fkTipo"]);
+                string foto = Lector["Foto"].ToString();
+                string nomb = Lector["Nombre"].ToString();
+                int precio = Convert.ToInt32(Lector["Precio"]);
+                Producto unProducto1 = new Producto(Id, fk, foto, nomb, precio);
+                unProducto = unProducto1;
+            }
 
+            Desconectar(Conexion);
+            return unProducto;
+        }
+        public static DatosProducto TraeDatosPorId(int id)
+        {
+            DatosProducto datos = new DatosProducto();
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spTraerDatosporId", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            while (Lector.Read())
+            {
+                /*int IdProd = Convert.ToInt32(Lector["idProducto"]);
+                int fk = Convert.ToInt32(Lector["fkTipo"]);
+                string foto = Lector["Foto"].ToString();
+                
+                Producto unProducto1 = new Producto(Id, fk, foto, nomb, precio);
+                unProducto = unProducto1;
+            }*/
+
+            Desconectar(Conexion);
+            return unProducto;
         }
     }
 }

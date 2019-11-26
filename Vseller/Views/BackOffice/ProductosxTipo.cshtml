@@ -13,18 +13,24 @@
 <table>
     @foreach (Producto prod in ViewBag.Lista)
     {
-        <a href="@Url.Action("Producto", "BackOffice", new { idProd = prod.IdProducto })">
-            <tr>
-                <td>
-                    <img src="~/Content/img/@prod.Foto" />
-                </td>
-                <td>
-                    <p>@prod.Nombre</p>
-                </td>
-                <td>
-                    <img src="~/Content/img/editicon.png" style=" width:5%" />
-                </td>
-            </tr>            
-        </a>
-    }
-</table>
+        <tr>
+            <td>
+                <img src="~/Content/img/@prod.NomFoto" style=" width:100px" />
+            </td>
+            <td>
+                <p>@prod.Nombre</p>
+            </td>
+            <td>
+                <a href="@Url.Action("Producto", "BackOffice", new { idProd = prod.IdProducto })">
+                    <img src="~/Content/img/editicon.png" style=" width:50px" />
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Producto", "BackOffice", new { idProd = prod.IdProducto })">
+                    <img src="~/Content/img/deleteicon.png" style=" width:50px" />
+                </a>
+            </td>
+        </tr>    
+            }
+    </table>
+
