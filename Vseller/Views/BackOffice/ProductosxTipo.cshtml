@@ -13,26 +13,18 @@
 <table>
     @foreach (Producto prod in ViewBag.Lista)
     {
-       /* <a href="@Url.Action("ProductosxTipo", "BackOffice", new {IdTipoProd=tip.Id})">
-            <div class="col-lg-4">
-                <div class="offer_item">
-                    <img class="img-fluid" src="~/Content/img/@tip.Img" alt="">
-                    <div class="offer_text">
-                        @tip.Desc
-                    </div>
-                </div>
-            </div>
-        </a>*/
-        <tr>
-            <td>
-                <img src="~/Content/@prod.Foto" />
-            </td>
-            <td>
-                <p>@prod.Nombre</p>
-            </td>
-            <td>
-                <img src="~/Content/img/editicon.png" style=" width:5%"/>
-            </td>
-        </tr>
+        <a href="@Url.Action("Producto", "BackOffice", new { idProd = prod.IdProducto })">
+            <tr>
+                <td>
+                    <img src="~/Content/img/@prod.Foto" />
+                </td>
+                <td>
+                    <p>@prod.Nombre</p>
+                </td>
+                <td>
+                    <img src="~/Content/img/editicon.png" style=" width:5%" />
+                </td>
+            </tr>            
+        </a>
     }
 </table>
