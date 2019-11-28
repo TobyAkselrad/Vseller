@@ -29,19 +29,15 @@ namespace Vseller.Controllers
 
         public ActionResult editarProducto(int IdProd)
         {
-            Producto unProducto = new Producto();
-            unProducto = BD.TraerProductoPorId(IdProd);
-            ViewBag.Producto = unProducto;
-            DatosProducto datos = new DatosProducto();
-            datos = BD.TraeDatosPorId(IdProd);
-            ViewBag.Datos = datos;
+
+            ProductoDetalleProducto PDP = BD.TraerProductoCompleto(IdProd);
             List<tipo> Tipos = new List<tipo>();
             Tipos = BD.TraerTipos();
             ViewBag.Tipos = Tipos;
             List<Detalle> Detalles = new List<Detalle>();
             Detalles= BD.TraerDetalle();
             ViewBag.Detalles = Detalles;
-            return View();
+            return View(PDP);
         }
 
         public ActionResult EliminarProducto(int id)
@@ -49,6 +45,22 @@ namespace Vseller.Controllers
             BD.EliminarProducto(id);
             return View("Index");
         }
+
+        /*[HttpPost]
+        public ActionResult Editar(ProductoDetalleProducto PDP)
+        {
+            if (PDP.foto != null)
+            {
+                string NuevaUbicacion = Server.MapPath("~/Content/") + PDP.foto.FileName;
+                PDP.foto.SaveAs(NuevaUbicacion);
+                PDP.nomFoto= PDP.foto.FileName;
+            }
+            BD.EditarNoticias(not);
+            List<Noticias> ListaNoticias = new List<Noticias>();
+            ListaNoticias = BD.TraerNoticias();
+            ViewBag.Noticia = ListaNoticias;
+            return View("Index");
+        }*/
 
 
     }

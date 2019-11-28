@@ -153,7 +153,7 @@ namespace Vseller.Models
         {
             Producto unProducto = new Producto();
             SqlConnection Conexion = Conectar();
-            SqlCommand cmd = new SqlCommand("spTraerProductoPorTipo", Conexion);
+            SqlCommand cmd = new SqlCommand("spTraerProductoPorId", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", id);
             SqlDataReader Lector = cmd.ExecuteReader();
@@ -221,6 +221,25 @@ namespace Vseller.Models
 
             Desconectar(Conexion);
             return ListDetalles;
+        }
+
+        public static ProductoDetalleProducto TraerProductoCompleto(int idProducto)
+        {
+
+            Producto prod = TraerProductoPorId(idProducto);
+            DatosProducto dato = TraeDatosPorId(idProducto);
+
+            ProductoDetalleProducto PDP = new ProductoDetalleProducto();
+            PDP.idProducto = prod.IdProducto;
+            PDP.fkTipo = prod.FkTipo;
+            PDP.nombre = prod.Nombre;
+            PDP.nomFoto = prod.NomFoto;
+            PDP.precio = prod.Precio;
+            PDP.usuario = prod.Usario;
+            PDP.idDetalle= dato.fkDetalle;
+            PDP.descripcion = dato.descripcion;
+
+            return PDP;
         }
     }
 }

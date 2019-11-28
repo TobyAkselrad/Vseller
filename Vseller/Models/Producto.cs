@@ -13,6 +13,7 @@ namespace Vseller.Models
         private HttpPostedFileBase foto;
         private string _nombre;
         private int _precio;
+        private string _usario;
 
         public int IdProducto { get => _idProducto; set => _idProducto = value; }
         public int FkTipo { get => _fkTipo; set => _fkTipo = value; }
@@ -20,6 +21,7 @@ namespace Vseller.Models
         public HttpPostedFileBase Foto { get => foto; set => foto = value; }
         public string Nombre { get => _nombre; set => _nombre = value; }
         public int Precio { get => _precio; set => _precio = value; }
+        public string Usario { get => _usario; set => _usario = value; }
 
         public Producto()
         {
