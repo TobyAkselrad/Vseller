@@ -29,7 +29,7 @@ namespace Vseller.Controllers
 
         public ActionResult editarProducto(int IdProd)
         {
-
+            //xd
             ProductoDetalleProducto PDP = BD.TraerProductoCompleto(IdProd);
 
             ViewBag.Tipos = BD.TraerTipos(); 
