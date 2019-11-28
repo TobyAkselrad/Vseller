@@ -20,7 +20,7 @@
     <p>Usuario</p> @Html.TextBoxFor(model => model.usuario) @Html.ValidationMessageFor(model => model.usuario)<br />
     @Html.DropDownListFor(model => model.idDetalle, new SelectList(ViewBag.Detalles, "IdDetalle", "Desc"), "Ingrese Detalle")<br />
     @Html.TextBoxFor(model => model.descripcion) @Html.ValidationMessageFor(model => model.descripcion)<br />
-
+    <div></div>
 
     <input type="submit" value="Ingresar">
 }
