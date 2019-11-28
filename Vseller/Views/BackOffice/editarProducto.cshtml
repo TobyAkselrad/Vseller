@@ -10,17 +10,31 @@
 @using Vseller.Models
 @model ProductoDetalleProducto
 
+@{
+    string Cambio;
+}
+@if (ViewBag.Cambio == "Editar")
+{
+    Cambio = "Editar";
+}
+else
+{
+    Cambio = "Crear";
+}
 
-@using (Html.BeginForm("Index", "BackOffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm(Cambio, "BackOffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <p>Nombre</p> @Html.TextBoxFor(model => model.nombre) @Html.ValidationMessageFor(model => model.nombre)<br />
     @Html.DropDownListFor(model => model.fkTipo, new SelectList(ViewBag.Tipos, "Id", "desc"), "Ingrese tipo") <br />
     <p>Precio</p> @Html.TextBoxFor(model => model.precio) @Html.ValidationMessageFor(model => model.precio)<br />
     @Html.TextBoxFor(model => model.foto, new { type = "file" })
     <p>Usuario</p> @Html.TextBoxFor(model => model.usuario) @Html.ValidationMessageFor(model => model.usuario)<br />
-    @Html.DropDownListFor(model => model.idDetalle, new SelectList(ViewBag.Detalles, "IdDetalle", "Desc"), "Ingrese Detalle")<br />
-    @Html.TextBoxFor(model => model.descripcion) @Html.ValidationMessageFor(model => model.descripcion)<br />
-    <div></div>
+    for (int i = 0; i < ViewBag.Detalles.Count; i++)
+    {
+        <p>@BD.TraerDetalleporId(ViewBag.Detalles[i].fkDetalle).Desc</p>
+        @Html.TextBoxFor(model => model.Detalles[i].descripcion)<br />
+    }
 
-    <input type="submit" value="Ingresar">
+    <input type="submit" value= Cambio>
 }

@@ -14,9 +14,7 @@ namespace Vseller.Models
         public string nombre { get; set; }
         public int precio { get; set; }
         public string usuario { get; set; }
-        public int idDetalle { get; set; }
-        public int descDetalle { get; set; }
-        public string descripcion { get; set; }
+        public List<DatosProducto> Detalles = new List<DatosProducto>();
 
 
 

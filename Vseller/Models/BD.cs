@@ -92,6 +92,7 @@ namespace Vseller.Models
             cmd.Parameters.AddWithValue("@Foto", prod.NomFoto);
             cmd.Parameters.AddWithValue("@Nombre", prod.Nombre);
             cmd.Parameters.AddWithValue("@Precio", prod.Precio);
+            cmd.Parameters.AddWithValue("@Usuario", prod.Usuario);
             SqlDataReader Lector = cmd.ExecuteReader();
             Desconectar(Conexion);
         }
@@ -143,7 +144,8 @@ namespace Vseller.Models
                 string foto = Lector["Foto"].ToString();
                 string nomb = Lector["Nombre"].ToString();
                 int precio = Convert.ToInt32(Lector["Precio"]);
-                unProducto = new Producto(Id, fk, foto, nomb, precio);
+                string Usuario = Lector["fkUsuario"].ToString();
+                unProducto = new Producto(Id, fk, foto, nomb, precio,Usuario);
                 ListaProductos.Add(unProducto);
             }
             Desconectar(Conexion);
@@ -164,16 +166,18 @@ namespace Vseller.Models
                 string foto = Lector["Foto"].ToString();
                 string nomb = Lector["Nombre"].ToString();
                 int precio = Convert.ToInt32(Lector["Precio"]);
-                Producto unProducto1 = new Producto(Id, fk, foto, nomb, precio);
+                string Usuario = Lector["fkUsuario"].ToString();
+                Producto unProducto1 = new Producto(Id, fk, foto, nomb, precio, Usuario);
                 unProducto = unProducto1;
             }
 
             Desconectar(Conexion);
             return unProducto;
         }
-        public static DatosProducto TraeDatosPorId(int id)
+        public static List<DatosProducto> TraeDatosPorId(int id)
         {
-            DatosProducto datos = new DatosProducto();
+            List<DatosProducto> Lista = new List<DatosProducto>();
+            DatosProducto datos1 = new DatosProducto();
             SqlConnection Conexion = Conectar();
             SqlCommand cmd = new SqlCommand("spTraerDatosporId", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -185,12 +189,12 @@ namespace Vseller.Models
                 int fkProducto = Convert.ToInt32(Lector["fkProducto"]);
                 int fkDetalle = Convert.ToInt32(Lector["fkDetalle"]);
 
-                DatosProducto datos1 = new DatosProducto(fkProducto, fkDetalle, deta);
-                datos = datos1;
+                datos1 = new DatosProducto(fkProducto, fkDetalle, deta);
+                Lista.Add(datos1);
             }
 
             Desconectar(Conexion);
-            return datos;
+            return Lista;
         }
 
         public static void EliminarProducto(int id)
@@ -223,11 +227,32 @@ namespace Vseller.Models
             return ListDetalles;
         }
 
+
+        public static Detalle TraerDetalleporId(int Id)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spTraerDetallesxId", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("Id", Id);
+            SqlDataReader Lector = cmd.ExecuteReader();
+
+            Detalle unDetalle = new Detalle();
+            while (Lector.Read())
+            {
+                string desc = Lector["Descripción"].ToString();
+                int idDetalle = Convert.ToInt32(Lector["idDetalle"]);
+                unDetalle = new Detalle(idDetalle, desc);
+            }
+
+            Desconectar(Conexion);
+            return unDetalle;
+        }
+
         public static ProductoDetalleProducto TraerProductoCompleto(int idProducto)
         {
 
             Producto prod = TraerProductoPorId(idProducto);
-            DatosProducto dato = TraeDatosPorId(idProducto);
+            List<DatosProducto> dato = TraeDatosPorId(idProducto);
 
             ProductoDetalleProducto PDP = new ProductoDetalleProducto();
             PDP.idProducto = prod.IdProducto;
@@ -235,11 +260,50 @@ namespace Vseller.Models
             PDP.nombre = prod.Nombre;
             PDP.nomFoto = prod.NomFoto;
             PDP.precio = prod.Precio;
-            PDP.usuario = prod.Usario;
-            PDP.idDetalle= dato.fkDetalle;
-            PDP.descripcion = dato.descripcion;
+            PDP.usuario = prod.Usuario;
+            PDP.Detalles = dato;
 
             return PDP;
         }
+
+        public static void EditarDetalle (DatosProducto dato)
+        {
+                SqlConnection Conexion = Conectar();
+                SqlCommand cmd = new SqlCommand("spEditarDescDetalle", Conexion);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Prod", dato.fkProducto);
+                cmd.Parameters.AddWithValue("@Det", dato.fkDetalle);
+                cmd.Parameters.AddWithValue("@Desc",dato.descripcion);                
+                SqlDataReader Lector = cmd.ExecuteReader();
+                Desconectar(Conexion);            
+        }
+
+        public static void EditarProducto(Producto prod)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spEditarProducto", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Id", prod.IdProducto);
+            cmd.Parameters.AddWithValue("@Tipo", prod.FkTipo);
+            cmd.Parameters.AddWithValue("@Foto", prod.NomFoto);
+            cmd.Parameters.AddWithValue("@Nombre", prod.Nombre);
+            cmd.Parameters.AddWithValue("@Precio", prod.Precio);
+            cmd.Parameters.AddWithValue("@Usuario", prod.Usuario);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            Desconectar(Conexion);
+        }
+
+        public static void CrearDetalle(DatosProducto dato)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spCargarDatosProducto", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Produc", dato.fkProducto);
+            cmd.Parameters.AddWithValue("@Detalle", dato.fkDetalle);
+            cmd.Parameters.AddWithValue("@Desc", dato.descripcion);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            Desconectar(Conexion);
+        }
+
     }
 }
