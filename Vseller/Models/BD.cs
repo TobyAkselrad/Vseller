@@ -88,7 +88,7 @@ namespace Vseller.Models
             SqlConnection Conexion = Conectar();
             SqlCommand cmd = new SqlCommand("spCargarProducto", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@fkTipo", prod.FkTipo);
+            cmd.Parameters.AddWithValue("@Tipo", prod.FkTipo);
             cmd.Parameters.AddWithValue("@Foto", prod.NomFoto);
             cmd.Parameters.AddWithValue("@Nombre", prod.Nombre);
             cmd.Parameters.AddWithValue("@Precio", prod.Precio);
@@ -197,15 +197,27 @@ namespace Vseller.Models
             return Lista;
         }
 
-        public static void EliminarProducto(int id)
+        public static void EliminarProducto(int idProd)
         {
             SqlConnection Conexion = Conectar();
-            SqlCommand cmd = new SqlCommand("spEliminarProducto", Conexion);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@id", id);
-            SqlDataReader Lector = cmd.ExecuteReader();
+            SqlCommand cma = new SqlCommand("spEliminarProducto", Conexion);
+            cma.CommandType = System.Data.CommandType.StoredProcedure;
+            cma.Parameters.AddWithValue("@id", idProd);
+            SqlDataReader Lector1 = cma.ExecuteReader();
             Desconectar(Conexion);
         }
+
+        public static void EliminarDatos(int idProd)
+        {
+            SqlConnection Conexion = Conectar();
+            SqlCommand cmd = new SqlCommand("spEliminarDatos", Conexion);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", idProd);
+            SqlDataReader Lector = cmd.ExecuteReader();
+            EliminarProducto(idProd);
+             Desconectar(Conexion);
+        }
+
 
         public static List<Detalle> TraerDetalle()
         {
@@ -231,7 +243,7 @@ namespace Vseller.Models
         public static Detalle TraerDetalleporId(int Id)
         {
             SqlConnection Conexion = Conectar();
-            SqlCommand cmd = new SqlCommand("spTraerDetallesxId", Conexion);
+            SqlCommand cmd = new SqlCommand("spTraerDetallesxId>", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("Id", Id);
             SqlDataReader Lector = cmd.ExecuteReader();
@@ -281,7 +293,7 @@ namespace Vseller.Models
         public static void EditarProducto(Producto prod)
         {
             SqlConnection Conexion = Conectar();
-            SqlCommand cmd = new SqlCommand("spEditarProducto", Conexion);
+            SqlCommand cmd = new SqlCommand("spspEditarProducto", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Id", prod.IdProducto);
             cmd.Parameters.AddWithValue("@Tipo", prod.FkTipo);

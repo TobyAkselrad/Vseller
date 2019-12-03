@@ -34,6 +34,7 @@ namespace Vseller.Controllers
 
             ViewBag.Tipos = BD.TraerTipos(); 
             ViewBag.Detalles = PDP.Detalles;
+            ViewBag.Cambio = true;
             return View(PDP);
         }
 
@@ -43,9 +44,9 @@ namespace Vseller.Controllers
         }
 
 
-        public ActionResult EliminarProducto(int id)
+        public ActionResult eliminarProducto(int idProd)
         {
-            BD.EliminarProducto(id);
+            BD.EliminarDatos(idProd);
             return View("Index");
         }
 
@@ -65,7 +66,7 @@ namespace Vseller.Controllers
             {
                 BD.EditarDetalle(Lista[i]);
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
