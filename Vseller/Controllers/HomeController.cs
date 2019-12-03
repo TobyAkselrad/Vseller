@@ -10,38 +10,44 @@ namespace Vseller.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index1()
         {
-            return View();
+            ViewBag.id = "";
+            bool Registrado = false;
+            ViewBag.Registrado = Registrado;
+            return View("Index");
         }
 
+        public ActionResult Index()
+        {
+        return View("Index");
+        }
         [HttpPost]
         public ActionResult Logueo(Usuario user)
-        {            
+        {
             bool Existe;
             bool Admin;
+            bool Registrado = false;
             Admin = BD.TraerAdmin(user);
-            if (ModelState.IsValid)
+            Existe = BD.ExisteUsuario(user);
+            if (Existe)
             {
-                Existe = BD.ExisteUsuario(user);
-                if (Existe)
+                if (Admin == false)
                 {
-                    if (Admin == false) {
-                        return View("Index");
-                    }
-
-                    else {
-                        return RedirectToAction("Index", "BackOffice");
-                    }
+                    Registrado = true;
+                    ViewBag.Registrado = Registrado;
+                    ViewBag.User = user;
+                    return View("Index");
                 }
+
                 else
                 {
-                    ViewBag.Error = "Nombre o usuario incorrectos";
-                    return View("Login", user);
+                    return RedirectToAction("Index", "BackOffice");
                 }
             }
             else
             {
+                ViewBag.Error = "Nombre o usuario incorrectos";
                 return View("Login", user);
             }
         }
@@ -58,32 +64,39 @@ namespace Vseller.Controllers
             if (existe)
             {
                 ViewBag.Error = "Nombre de usuario ya existente";
+                return View("Registro");
             }
             else
             {
                 BD.CargarUsuario(user);
+                return View("Index");
             }
-            return View("Registro");
+        }
+
+        public ActionResult CerrarSesión()
+        {
+            bool Registrado = false;
+            ViewBag.Registrado = Registrado;
+            return View("Index");
         }
 
 
         public ActionResult Registro()
         {
-            return Index();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Labura Fede";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Busqueda()
         {
-            ViewBag.Message = "Your contact page.";
-
+            bool Registrado = false;
+            ViewBag.Registrado = Registrado;
             return View();
         }
+
+        public ActionResult Busqueda1()
+        {
+            return View("Busqueda");
+        }
+
     }
 }

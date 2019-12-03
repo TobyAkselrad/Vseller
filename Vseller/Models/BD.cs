@@ -101,8 +101,10 @@ namespace Vseller.Models
             SqlConnection Conexion = Conectar();
             SqlCommand cmd = new SqlCommand("spCargarUsuario", Conexion);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@username", user.Username);
-            cmd.Parameters.AddWithValue("@password", user.Contraseña);
+            cmd.Parameters.AddWithValue("@nom", user.Nombre);
+            cmd.Parameters.AddWithValue("@user", user.Username);
+            cmd.Parameters.AddWithValue("@pass", user.Contraseña);
+            cmd.Parameters.AddWithValue("@adm", 0);
             SqlDataReader Lector = cmd.ExecuteReader();
             Desconectar(Conexion);
         }

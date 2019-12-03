@@ -1,30 +1,71 @@
-﻿<link rel="stylesheet" href="~/Content/bootstrap.css">
-<link rel="stylesheet" href="~/Content/style.css">
-<link rel="stylesheet" href="~/Content/font-awesome.min.css">
-<link rel="stylesheet" href="~/Content/owl.carousel.min.css">
-<link rel="stylesheet" href="~/Content/simpleLightbox.css">
-<link rel="stylesheet" href="~/Content/nice-selecReferencia a objeto no establecida como instancia de un objeto.'
-t.css">
-<link rel="stylesheet" href="~/Content/animate.css">
-<link rel="stylesheet" href="~/Content/style.css">
-<link rel="stylesheet" href="~/Content/responsive.css">
-@using Vseller.Models
+﻿<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/Content/logo.png" type="image/png">
+    <title>Vseller</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/linericon/style.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/simpleLightbox.css">
+    <link rel="stylesheet" href="~/Content/nice-select.css">
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/responsive.css">
+</head>
+<body>
 
-
-<h1>Productos</h1>
-@foreach (tipo tip in ViewBag.Tipos)
-{
-    <a href="@Url.Action("ProductosxTipo", "BackOffice", new {IdTipoProd=tip.Id})">
-        <div class="col-lg-4">
-            <div class="offer_item">
-                <img class="img-fluid" src="~/Content/img/@tip.Img" alt="" style=" width:">
-                <div class="offer_text">
-                    @tip.Desc
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container box_1620">
+                    <a class="navbar-brand logo_h" href="@Url.Action("Index","Home")"><img src="~/Content/logo.png" alt="" style="width: 70px; height: 70px;"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                       
+                            <ul class="nav navbar-nav menu_nav ml-auto">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                            </ul>
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="#" class="search"><img src="~/Content/Changuinho.png" width="18px"></i></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </div>
-    </a>
-}
+    </header>
+
+    @using Vseller.Models
+
+    <div id="prods">
+        <h1 style="padding-left: 550px;">Productos</h1>
+        @foreach (tipo tip in ViewBag.Tipos)
+        {
+            <a href="@Url.Action("ProductosxTipo", "BackOffice", new {IdTipoProd=tip.Id})">
+                <div class="col-lg-4">
+                    <div class="offer_item">
+                        <img class="img-fluid" src="~/Content/img/@tip.Img" alt="" style=" width:">
+                        <div class="offer_text">
+                            @tip.Desc
+                        </div>
+                    </div>
+                </div>
+            </a>
+        }
 
 
 
+    </div>

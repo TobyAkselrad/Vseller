@@ -1,24 +1,86 @@
 ﻿@using Vseller.Models
 @model Usuario
 
-@if (ViewBag.Error != "")
-{
-    <p>@ViewBag.Error</p>
-}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/Content/logo.png" type="image/png">
+    <title>Vseller</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/simpleLightbox.css">
+    <link rel="stylesheet" href="~/Content/nice-select.css">
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/responsive.css">
+</head>
+<body>
 
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container box_1620">
 
-<div id="centrado">
-    @using (Html.BeginForm("Logueo", "Home", FormMethod.Post))
-    {
-        <h3>Login</h3>
-        <p>Username</p> @Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)<br />
-        <p>Password</p> @Html.PasswordFor(model => model.Contraseña)@Html.ValidationMessageFor(model => model.Contraseña)<br />        
-        <div id="espacioArriba">
-            <input type="submit" value="Ingresar">
+                    <a class="navbar-brand logo_h" href="@Url.Action("Index","Home")"><img src="	~/Content/logo.png" alt="" style="width: 70px; height: 70px;"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Registro","Home")">Sign Up</a>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Login","Home")">Sign In</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="#" class="search"><img src="~/Content/Changuinho.png" width="18px"></i></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-
-    }
-
-    <a href="@Url.Action("Registro","Home")">Registrarse</a>
-
-</div>
+    </header>
+    <!--================Header Menu Area =================-->
+    <!--================Home Banner Area =================-->
+    <section class="home_contact_area">
+        <div class="left_img">
+            <img src="~/Content/signup.gif" alt="" style="width:600px; height:653px;">
+        </div>
+        <div class="h_right_form">
+            <div class="h_form_inner">
+                <h4>Sign In</h4>
+                @using (Html.BeginForm("Logueo", "Home", FormMethod.Post))
+                {
+                    <form class="row home_contact_form">
+                        <div class="form-group col-md-12">
+                            <p style="color: #fff; font-size: 18px; font-family: 'Roboto',sans-serif; ">Username</p> <div class="form-control">
+                                @Html.TextBoxFor(model => model.Username, new { maxlength = 12, style = "min-width:488px; min-height: 30px;  border: none; " }) @Html.ValidationMessageFor(model => model.Username)<br />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <p style="color: #fff; font-size: 18px; font-family: 'Roboto',sans-serif;">Password</p> <div class="form-control">
+                                @Html.PasswordFor(model => model.Contraseña, new { maxlength = 16, style = "min-width:488px; min-height: 30px;  border: none; " }) @Html.ValidationMessageFor(model => model.Contraseña)<br />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <input type="submit" value="submit" class="btn submit_btn form-control">
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+    </section>
+</body>
+</html>

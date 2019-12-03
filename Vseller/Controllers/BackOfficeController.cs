@@ -29,11 +29,11 @@ namespace Vseller.Controllers
 
         public ActionResult editarProducto(int IdProd)
         {
-            //xd
             ProductoDetalleProducto PDP = BD.TraerProductoCompleto(IdProd);
 
             ViewBag.Tipos = BD.TraerTipos(); 
             ViewBag.Detalles = PDP.Detalles;
+            ViewBag.Imagen = PDP.nomFoto;
             ViewBag.Cambio = true;
             return View(PDP);
         }
@@ -47,7 +47,7 @@ namespace Vseller.Controllers
         public ActionResult eliminarProducto(int idProd)
         {
             BD.EliminarDatos(idProd);
-            return View("Index");
+            return RedirectToAction("Index", "BackOffice");
         }
 
         [HttpPost]
@@ -55,7 +55,7 @@ namespace Vseller.Controllers
         {
             if (PDP.foto != null)
             {
-                string NuevaUbicacion = Server.MapPath("~/Content/") + PDP.foto.FileName;
+                string NuevaUbicacion = Server.MapPath("~/Content/img/") + PDP.foto.FileName;
                 PDP.foto.SaveAs(NuevaUbicacion);
                 PDP.nomFoto= PDP.foto.FileName;
             }

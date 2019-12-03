@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="~/Content/responsive.css">
 @using Vseller.Models
 @model ProductoDetalleProducto
-
 @{
     string Cambio;
 }
@@ -22,13 +21,15 @@ else
     Cambio = "Crear";
 }
 
-
 @using (Html.BeginForm(Cambio, "BackOffice", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.HiddenFor(model => model.idProducto)
     <p>Nombre</p> @Html.TextBoxFor(model => model.nombre) @Html.ValidationMessageFor(model => model.nombre)<br />
     @Html.DropDownListFor(model => model.fkTipo, new SelectList(ViewBag.Tipos, "Id", "desc"), "Ingrese tipo") <br />
     <p>Precio</p> @Html.TextBoxFor(model => model.precio) @Html.ValidationMessageFor(model => model.precio)<br />
     @Html.TextBoxFor(model => model.foto, new { type = "file" })
+    <img src="~/Content/img/@ViewBag.Imagen" />
+    @Html.HiddenFor(model => model.nomFoto)
     <p>Usuario</p> @Html.TextBoxFor(model => model.usuario) @Html.ValidationMessageFor(model => model.usuario)<br />
     for (int i = 0; i < ViewBag.Detalles.Count; i++)
     {
@@ -36,5 +37,5 @@ else
         @Html.TextBoxFor(model => model.Detalles[i].descripcion)<br />
     }
 
-    <input type="submit" value= Cambio>
+    <input type="submit" value=Cambio>
 }

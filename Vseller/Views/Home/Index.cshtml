@@ -1,2 +1,335 @@
 ﻿
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/Content/logo.png" type="image/png" style="width: 360px; height: 250px;">
+    <title>Vseller</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/simpleLightbox.css">
+    <link rel="stylesheet" href="~/Content/nice-select.css">
+    <link rel="stylesheet" href="~/Content/animate.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/responsive.css">
+</head>
+<body>
+    <!--================Header Menu Area =================-->
+    <header class="header_area">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container box_1620">
 
+                    <a class="navbar-brand logo_h" href="@Url.Action("  ","Home")"><img src="	~/Content/logo.png" alt="" style="width: 70px; height: 70px;"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <input type="text" class="searchposts" placeholder="Search Posts" value="@(ViewBag.id)" />
+                        <span class="input-group-btn">
+                            <button href="~/Views/Home/Busqueda.cshtml" class="btn btn-default" type="submit" onclick=""></button> <a href="@Url.Action("Busqueda","Home")"><img src="~/Content/lupa.png" style="width: 20px; height: 20px; align-content:center;" /></button>
+                            </a>   
+                                </span>
+                        @if (ViewBag.Registrado == null)
+                        {
+                            ViewBag.Registrado = false;
+                        }
+                        @if (ViewBag.Registrado)
+                        {
+                            <ul class="nav navbar-nav menu_nav ml-auto">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                                <li class="nav-item"><a class="nav-link">@ViewBag.User.Username</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("CerrarSesión", "Home")">Cerrar Sesión</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="nav navbar-nav menu_nav ml-auto">
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Registro", "Home")">Sign Up</a>
+                                <li class="nav-item"><a class="nav-link" href="@Url.Action("Login", "Home")">Sign In</a></li>
+
+                            </ul>
+                        }
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item"><a href="#" class="search"><img src="~/Content/Changuinho.png" width="18px;"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--================Header Menu Area =================-->
+    <!--================Home Banner Area =================-->
+    <section class="home_banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h3>Vseller</h3>
+                    <h5>COMPRA SIN MIEDO A EQUIVOCARTE</h5>
+                    <a class="org_btn" href="#">Explore Us</a>
+                    <a class="green_btn" href="#">Buy now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+    <!--================Offer Area =================-->
+    <section class="offer_area p_120">
+        <div class="container">
+            <div class="offer_title">
+                <h5> Popular Brands </h5>
+            </div>
+            <div class="row offer_inner">
+                <div class="col-lg-4">
+                    <a href="signin.html">
+                        <div class="offer_item">
+                            <a href="@Url.Action("Login", "Home")">
+                                <img class="img-fluid" src="~/Content/offer-1.jpg" alt="" style="width: 360px; height: 250px;">
+                                <div class="offer_text">
+                                    <h4>ADIDAS</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4">
+                    <div class="offer_item">
+                        <a href="@Url.Action("Login", "Home")">
+                            <img class="img-fluid" src="~/Content/offer-2.jpg" alt="" style="width: 360px; height: 250px;">
+                            <div class="offer_text">
+                                <h4>YEEZY</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="offer_item">
+                        <a href="@Url.Action("Login", "Home")">
+                            <img class="img-fluid" src="~/Content/offer-3.jpg" alt="" style="width: 360px; height: 250px;">
+                            <div class="offer_text">
+                                <h4>JORDAN</h4>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Offer Area =================-->
+    <!--================Feature Area =================-->
+    <section class="feature_area p_120">
+        <div class="container">
+            <div class="main_title">
+                <h2>Our Top Rated Sellers</h2>
+            </div>
+            <div class="row feature_inner">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature_item">
+                        <h4>Off White</h4>
+                        <img src="~/Content/offwhite.png" width="200px" height="200px">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature_item">
+                        <h4>Nike</h4>
+                        <img src="~/Content/nike.png" width="200px" height="200px">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature_item">
+                        <h4>Vans</h4>
+                        <img src="~/Content/vans.png" width="200px" height="200px">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="feature_item">
+                        <h4>Adidas</h4>
+                        <img src="~/Content/adidas.png" width="200px" height="200px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Feature Area =================-->
+    <!--================Home Gallery Area =================-->
+    <section class="home_gallery_area p_120">
+        <div class="container">
+            <div class="main_title">
+                <h2>Our Recent Completed Projects</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+            </div>
+            <div class="isotope_fillter">
+                <ul class="gallery_filter list">
+                    <li class="active" data-filter="*"><a href="#">All Categories</a></li>
+                    <li data-filter=".brand"><a href="#">Sneakers</a></li>
+                    <li data-filter=".manipul"><a href="#">Hoodies & T-Shirts</a></li>
+                    <li data-filter=".creative"><a href="#">Shorts & Pants</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="gallery_f_inner row imageGallery1">
+                <div class="col-lg-4 col-md-4 col-sm-6 brand">
+                    <div class="h_gallery_item">
+                        <div class="g_img_item">
+                            <img class="img-fluid" src="~/Content/travisscotaf1.jpg" alt="" />
+                            <a class="light" href="~/Content/travisscotaf1.jpg"><img src="~/Content/icon.png" alt=""></a>
+                        </div>
+                        <div class="g_item_text">
+                            <h4>Air Force 1 Low Travis Scott Cactus Jack</h4>
+                            <p>Brand new</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 brand brand">
+                    <div class="h_gallery_item">
+                        <div class="g_img_item">
+                            <img class="img-fluid" src="~/Content/img01.jpg" alt="">
+                            <a class="light" href="~/Content/img01.jpg"><img src="~/Content/icon.png" alt=""></a>
+                        </div>
+                        <div class="g_item_text">
+                            <h4>Jordan 1 Retro High Fearless UNC Chicago</h4>
+                            <p>New</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 creative">
+                    <div class="h_gallery_item">
+                        <div class="g_img_item">
+                            <img class="img-fluid" src="~/Content/fognikeshorts.jpg">
+                            <a class="light" href="~/Content/fognikeshorts.jpg"><img src="~/Content/icon.png" alt=""></a>
+                        </div>
+                        <div class="g_item_text">
+                            <h4>FEAR OF GOD FOG Essentials Drawstring Shorts White</h4>
+                            <p>Used</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 creative">
+                    <div class="h_gallery_item" width="210px" height="210px">
+                        <div class="g_img_item">
+                            <img class="img-fluid" src="~/Content/bapecamoshorts.jpg">
+                            <a class="light" href="~/Content/bapecamoshorts.jpg"><img src="~/Content/icon.png" alt=""></a>
+                        </div>
+                        <div class="g_item_text">
+                            <h4>BAPE Mix Camo Shark Shorts Multi</h4>
+                            <p>New</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 manipul">
+                    <div class="h_gallery_item">
+                        <div class="g_img_item">
+                            <img class="img-fluid" src="~/Content/fogessentialspink.jpg" alt="">
+                            <a class="light" href="~/Content/fogessentialspink.jpg"><img src="~/Content/icon.png" alt=""></a>
+                        </div>
+                        <div class="g_item_text">
+                            <h4>FEAR OF GOD ESSENTIALS Pink 3M Logo Pullover Hoodie Blush</h4>
+                            <p>Brand new</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 brand">
+                    <div class="h_gallery_item">
+                        <div class="g_img_item">
+                            <img class="img-fluid" src="~/Content/goretexnike.jpg" alt="">
+                            <a class="light" href="~/Content/goretexnike.jpg"><img src="~/Content/icon.png" alt=""></a>
+                        </div>
+                        <div class="g_item_text">
+                            <h4>Air Force 1 Gore-tex High Phantom White</h4>
+                            <p>Brand new</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Gallery Area =================-->
+    <!--================ start footer Area  =================-->
+    <footer class="footer-area section_gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3  col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">About VSeller</h6>
+                        <p>The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point where clothes and sneakers are</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Help links</h6>
+                        <div class="row">
+                            <div class="col-4">
+                                <ul class="list">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Information</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h6 class="footer_title">Newsletter</h6>
+                        <p>For receiving daily offers news and more suscribe free to our Newsletter, </p>
+                        <div id="mc_embed_signup">
+                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
+                                <div class="input-group d-flex flex-row">
+                                    <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                    <button class="btn sub-btn"><img src="~/Content/lupa.png" style="width: 20px; height: 20px;"></button>
+                                </div>
+                                <div class="mt-10 info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border_line"></div>
+            <div class="row footer-bottom d-flex justify-content-between align-items-center">
+                <p class="col-lg-8 col-md-8 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made by <a href="https://lizion.com" target="_blank">LIZION</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+                <div class="col-lg-4 col-md-4 footer-social">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--================ End footer Area  =================-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Content/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/popper.js"></script>
+    <script src="~/Content/bootstrap.min.js"></script>
+    <script src="~/Content/stellar.js"></script>
+    <script src="~/Content/simpleLightbox.min.js"></script>
+    <script src="~/Content/jquery.nice-select.min.js"></script>
+    <script src="~/Content/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/isotope-min.js"></script>
+    <script src="~/Content/wl.carousel.min.js"></script>
+    <script src="~/Content/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/jquery.waypoints.min.js"></script>
+    <script src="~/Content/jquery.counterup.js"></script>
+    <script src="~/Content/mail-script.js"></script>
+    <script src="~/Content/theme.js"></script>
+</body>
+</html>
